@@ -3,9 +3,8 @@ import java.util.Scanner;
 public class Calculator {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean running = true;
 
-        while(running) {
+        while(true) {
 
             //display menu
             
@@ -14,22 +13,40 @@ public class Calculator {
             System.out.println("2: subtraction");
             System.out.println("3: multiplication");
             System.out.println("4: division");
-            System.out.println("5: exit");
+            System.out.println("5: exponentiation (num1^num2)");
+            System.out.println("6: exit");
             System.out.println("choose an optipon");
+
+            //check if the input is an integer
+            if(!scanner.hasNextInt()){
+                System.out.println("invalid input, please enter a valid integer");
+                scanner.next(); //clear the invalid input
+                continue;
+            }
 
             int choice = scanner.nextInt();
 
-            if(choice == 5){
+            if(choice == 6){
                 System.out.println("exciting calculator, goodbyee");
-                running = false;
-                continue;
+                break;
             }
 
             //take user inputs for numbers
 
             System.out.println("enter fisrt number");
+            if (!scanner.hasNextDouble()) { // check if the input is a number
+                System.out.println("invalid input, please enter a valid number");
+                scanner.next(); //clear the invalid input
+                continue;
+            }
             double num1 = scanner.nextDouble();
+
             System.out.println("enter second number");
+            if (!scanner.hasNextDouble()){ //check if the input is a number 
+                System.out.println("invalid input, please enter a valid number");
+                scanner.next(); //clear the invalid input
+                continue;
+            }
             double num2 = scanner.nextDouble();
             double result = 0;
 
@@ -54,6 +71,11 @@ public class Calculator {
                         System.out.println("error! division by zero is not allowed");
                     }
                     break;
+                case 5:
+                 result = Math.pow(num1, num2);
+                 System.out.println("result:" + result);
+                 break;
+
                 default:
                     System.out.println("invalid option, please try again");
             }
